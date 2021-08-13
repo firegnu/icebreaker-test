@@ -116749,16 +116749,6 @@ var JioKaiAds = function () {
     value: function () {
       function showAds(containerCfg) {
         if (true) {
-          var timeout = setTimeout(function () {
-            var frame = document.getElementById('iframe-ads');
-            if (frame) {
-              frame.remove();
-            }
-            clearTimeout(timeout);
-            navigator.spatialNavigationEnabled = false;
-            containerCfg.onAdFinished();
-          }, 10000);
-
           var ifrm = document.createElement('iframe');
           ifrm.setAttribute('id', 'iframe-ads');
           ifrm.setAttribute('style', 'border: none;');
@@ -116777,33 +116767,13 @@ var JioKaiAds = function () {
               uid: window.uid
             },
             listeners: {
-              adviewability: function () {
-                function adviewability() {
-                  clearTimeout(timeout);
-                  navigator.spatialNavigationEnabled = true;
-                  console.log('...............................................adsvisibility!!!!');
-                }
-
-                return adviewability;
-              }(),
               adclose: function () {
                 function adclose() {
-                  clearTimeout(timeout);
                   console.log('ad close 1');
-                  navigator.spatialNavigationEnabled = false;
-                  console.log('close spatiaNavigation...............');
                   containerCfg.onAdFinished();
                 }
 
                 return adclose;
-              }(),
-              adclick: function () {
-                function adclick() {
-                  clearTimeout(timeout);
-                  console.log('ad clicked 1');
-                }
-
-                return adclick;
               }()
             }
           });
